@@ -1,6 +1,6 @@
 package com.jellysoft.todo.app.models;
 
-public class item {
+public class Item {
 
 	private int itemId;
 	private String description;
