@@ -16,8 +16,7 @@ import com.jellysoft.todo.app.models.Item;
 @Path("/item")
 public class ItemResource {
 
-	private static Logger LOGGER = Logger
-			.getLogger(com.jellysoft.todo.app.resources.ItemResource.class);
+	private static Logger LOGGER = Logger.getLogger(com.jellysoft.todo.app.resources.ItemResource.class);
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
@@ -32,7 +31,6 @@ public class ItemResource {
 		System.out.println("Getting Item Id - " + itemId);
 		Item i = new Item();
 		i.setDescription("Something to do!");
-		i.setItemId(1);
 		i.setSummary("Item Summary");
 		return i;
 	}

@@ -4,29 +4,35 @@ import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 
+import com.jellysoft.todo.app.models.ItemList;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 public class Database {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(com.jellysoft.todo.app.persistence.Database.class);
+	private static final String MONGO_DB_HOST = "localhost";
 
-	private static final String DB_NAME = "ToDoAppDB";
+	private static final int MONGO_DB_PORT = 27017;
 
-	private Database instance = null;
+	private static final Logger LOGGER = Logger.getLogger(com.jellysoft.todo.app.persistence.Database.class);
+
+	private static final String DB_NAME = "simple-todo-app-db";
+	private static final String COLLECTION_NAME = "simple-todo-app-collection";
+
+	private static Database instance = null;
 	private MongoClient client = null;
 
 	private Database(MongoClient client) {
 		this.client = client;
 	}
 
-	public synchronized Database getInstance() throws UnknownHostException {
+	public static synchronized Database getInstance() throws UnknownHostException {
 		if (instance == null) {
 			LOGGER.info("Connecting to MongoDB");
-			this.instance = new Database(new MongoClient("localhost", 28017));
+			instance = new Database(new MongoClient(MONGO_DB_HOST, MONGO_DB_PORT));
 		}
-		return this;
+		return instance;
 	}
 
 	public MongoClient getMongoClient() {
@@ -35,5 +41,11 @@ public class Database {
 
 	public DB getDB() {
 		return this.client.getDB(DB_NAME);
+	}
+
+	public DBCollection getItemListCollection() {
+		DBCollection collection = getDB().getCollection(COLLECTION_NAME);
+		collection.setObjectClass(ItemList.class);
+		return collection;
 	}
 }

@@ -2,20 +2,13 @@ package com.jellysoft.todo.app.models;
 
 import java.util.Date;
 
-public class Item {
+import com.mongodb.ReflectionDBObject;
 
-	private int itemId;
+public class Item extends ReflectionDBObject {
+
 	private String description;
 	private String summary;
 	private Date dateCreated;
-
-	public int getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
 
 	public String getDescription() {
 		return description;
@@ -44,7 +37,6 @@ public class Item {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("itemId: " + itemId);
 		builder.append("description: " + description);
 		builder.append("summary: " + summary);
 		return builder.toString();
