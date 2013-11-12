@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.jellysoft.todo.app.models.Item;
 
-@Path("/item")
+@Path("/itemlist/{itemListId}")
 public class ItemResource {
 
 	private static Logger LOGGER = Logger.getLogger(com.jellysoft.todo.app.resources.ItemResource.class);
