@@ -1,6 +1,8 @@
 package com.jellysoft.todo.app.resources;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,19 +20,31 @@ import com.jellysoft.todo.app.models.ItemList;
 import com.jellysoft.todo.app.persistence.Database;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
-@Path("/itemlist")
+@Path("/itemlists")
 public class ItemListResource {
 
 	private static Logger LOGGER = Logger.getLogger(com.jellysoft.todo.app.resources.ItemListResource.class);
 
-	@Path("/{listId}")
+	@Path("/id/{listId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	public ItemList getItemList(@PathParam("listId") String listId) throws UnknownHostException {
 		return (ItemList) findItemListById(listId);
+	}
+
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public List<ItemList> getItemList() throws UnknownHostException {
+		DBCursor curosr = Database.getInstance().getItemListCollection().find();
+		List<ItemList> output = new ArrayList<ItemList>();
+		while (curosr.hasNext()) {
+			output.add((ItemList) curosr.next());
+		}
+		return output;
 	}
 
 	@PUT
@@ -44,7 +58,7 @@ public class ItemListResource {
 	}
 
 	@DELETE
-	@Path("/{listId}")
+	@Path("/id/{listId}")
 	public void deleteItemList(@PathParam("listId") String listId) throws UnknownHostException {
 		LOGGER.info("Removing Item List - " + listId);
 		DBCollection collection = Database.getInstance().getItemListCollection();
@@ -65,4 +79,5 @@ public class ItemListResource {
 		DBCollection collection = Database.getInstance().getItemListCollection();
 		return collection.findOne(new BasicDBObject("_id", new ObjectId(id)));
 	}
+
 }
