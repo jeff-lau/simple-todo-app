@@ -1,5 +1,6 @@
 package com.jellysoft.todo.app.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class ItemList extends ReflectionDBObject {
 
 	private String name;
 	private Date dateCreated;
-	private List<Item> itemList;
+	private List<Item> items = new ArrayList<Item>();
 
 	public ItemList() {
 	}
@@ -27,12 +28,12 @@ public class ItemList extends ReflectionDBObject {
 		this.dateCreated = dateCreated;
 	}
 
-	public List<Item> getItemList() {
-		return itemList;
+	public List<Item> getItems() {
+		return items;
 	}
 
-	public void setItemList(List<Item> itemList) {
-		this.itemList = itemList;
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	public String getName() {
@@ -41,5 +42,9 @@ public class ItemList extends ReflectionDBObject {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getObjectIdStr() {
+		return this.get_id().toString();
 	}
 }

@@ -4,8 +4,10 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -16,13 +18,13 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 
+import com.jellysoft.todo.app.models.Item;
 import com.jellysoft.todo.app.models.ItemList;
 import com.jellysoft.todo.app.persistence.Database;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 
 @Path("/itemlists")
 public class ItemListResource {
@@ -33,12 +35,12 @@ public class ItemListResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	public ItemList getItemList(@PathParam("listId") String listId) throws UnknownHostException {
-		return (ItemList) findItemListById(listId);
+		return findItemListById(listId);
 	}
 
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public List<ItemList> getItemList() throws UnknownHostException {
+	public List<ItemList> getItemLists() throws UnknownHostException {
 		DBCursor curosr = Database.getInstance().getItemListCollection().find();
 		List<ItemList> output = new ArrayList<ItemList>();
 		while (curosr.hasNext()) {
@@ -47,14 +49,25 @@ public class ItemListResource {
 		return output;
 	}
 
+	@Path("/id/{listId}")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addItemToList(@PathParam("listId") String listId, Item item) throws UnknownHostException {
+		DBCollection collection = Database.getInstance().getItemListCollection();
+		BasicDBObject itemToInsert = new BasicDBObject(item.toMap());
+		BasicDBObject findQuery = new BasicDBObject("_id", new ObjectId(listId));
+		BasicDBObject updateCommand = new BasicDBObject("$push", new BasicDBObject("Items", itemToInsert));
+		collection.update(findQuery, updateCommand);
+	}
+
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	public ItemList createItemList(@QueryParam("name") String name) throws UnknownHostException {
 		ItemList list = new ItemList(name);
 		DBCollection collection = Database.getInstance().getItemListCollection();
 		BasicDBObject basicDBObject = new BasicDBObject(list.toMap());
-		WriteResult result = collection.insert(basicDBObject);
-		return (ItemList) findItemListById(basicDBObject.get("_id").toString());
+		collection.insert(basicDBObject);
+		return findItemListById(basicDBObject.get("_id").toString());
 	}
 
 	@DELETE
@@ -75,9 +88,9 @@ public class ItemListResource {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	private DBObject findItemListById(String id) throws UnknownHostException {
+	private ItemList findItemListById(String id) throws UnknownHostException {
 		DBCollection collection = Database.getInstance().getItemListCollection();
-		return collection.findOne(new BasicDBObject("_id", new ObjectId(id)));
+		return (ItemList) collection.findOne(new BasicDBObject("_id", new ObjectId(id)));
 	}
 
 }
