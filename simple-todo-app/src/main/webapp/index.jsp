@@ -67,7 +67,10 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="http://yui.yahooapis.com/3.13.0/build/yui/yui-min.js"></script>
     
+	<script src="js/modules/template-loader/template-loader.js"></script>
 	<script src="js/model-views/items-card/items-card-model.js"></script>
+    <script src="js/model-views/items-card/items-card-view.js"></script>
+    
     <script src="js/simple-todo-app.js"></script>
     
     

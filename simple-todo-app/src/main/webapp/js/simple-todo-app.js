@@ -1,4 +1,4 @@
-YUI().use('node', 'event', 'items-card-model', function(Y){
+YUI().use('node', 'event', 'items-card-model', 'items-card-view', function(Y){
 	
 	Y.on('domready', function(e){
 			
@@ -9,16 +9,13 @@ YUI().use('node', 'event', 'items-card-model', function(Y){
 		itemsCard.load();
 		
 		itemsCard.after('load', function(){
-			alert(itemsCard.get('objectIdStr'));
+			itemsCardView.render();
 		});
 		
-		
-		
-		//var itemsCard = new Y.simpleTodo.ItemsCard({name : 'Another List!!'});
-		//itemsCard.save();
-		
-		//alert(itemsCard.get('name'));
-		//debugger;
+		var itemsCardView = new Y.simpleTodo.CardView({
+			model: itemsCard,
+			container: '.lists-container'
+		});
 		
 	});
 });
