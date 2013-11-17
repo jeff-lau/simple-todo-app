@@ -2,18 +2,9 @@ YUI.add('items-card-model', function(Y){
 	
 	var ItemsCard = Y.Base.create('item-list', Y.Model, [Y.ModelSync.REST], {
 		
-		root: '/simple-todo-app/webresources/itemlists',
-		url: '/simple-todo-app/webresources/itemlists/id/{id}',
-		
-		idAttribute : '_id',
-		
-		addItem: function(){
-			alert('Add Item');
-		},
-		
-		removeItem: function(){
-			alert('Remove Item');
-		}
+		root: '/simple-todo-app/webresources/itemlists/',
+		url: '/simple-todo-app/webresources/itemlists/id/{_id}',
+		idAttribute : '_id'
 		
 	}, {
 		
