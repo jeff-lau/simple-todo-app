@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import com.mongodb.ReflectionDBObject;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ItemList extends ReflectionDBObject {
 
 	private String name;
+	private String summary;
 	private Date dateCreated;
 	private List<Item> items = new ArrayList<Item>();
+	private Object someRandom;
 
 	public ItemList() {
 	}
@@ -44,7 +49,24 @@ public class ItemList extends ReflectionDBObject {
 		this.name = name;
 	}
 
-	public String getObjectIdStr() {
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public Object getSomeRandom() {
+		return someRandom;
+	}
+
+	public void setSomeRandom(Object someRandom) {
+		this.someRandom = someRandom;
+	}
+
+	public String getId() {
 		return this.get_id().toString();
 	}
+
 }

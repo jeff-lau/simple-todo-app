@@ -53,11 +53,69 @@
     <div class="lists-container">
 		This is the lists-container
 		
-		<div class="add-new-list ">
+		<div id="add-new-list"  data-toggle="modal" data-target="#myModal">
 			<span class="glyphicon glyphicon-plus" />
 		</div>
 		
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">New Postit</h4>
+		      </div>
+		      <div class="modal-bod">
+		      	<form role="form">
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Title</label>
+				    <input type="text" class="form-control" id="cardTitle" placeholder="Title for your postit note...">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Summary</label>
+				    <textarea class="form-control" id="cardSummary" rows="" cols=""></textarea>
+				  </div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="createNewCardButton">Create</button>
+		        
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		
+		
     </div><!-- /.container -->
+	<div>
+	
+		<div class="row">
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		</div>
+		<div class="row">
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		  <div class="col-md-1 cardDiv">.col-md-1</div>
+		</div>	
+	</div>
+	
+
 
 
     <!-- Bootstrap core JavaScript
@@ -69,9 +127,14 @@
     
 	<script src="js/modules/template-loader/template-loader.js"></script>
 	<script src="js/model-views/items-card/items-card-model.js"></script>
+	<script src="js/model-views/items-card-list/items-card-modellist.js"></script>
+	<script src="js/model-views/items-card-list/custom-rest-sync.js"></script>
+	
     <script src="js/model-views/items-card/items-card-view.js"></script>
-    
+	<script src="js/model-views/items-card-list/cards-grid-view.js"></script>
+
     <script src="js/simple-todo-app.js"></script>
+    
     
     
   </body>

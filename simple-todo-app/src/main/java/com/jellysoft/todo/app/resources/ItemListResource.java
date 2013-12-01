@@ -8,11 +8,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
@@ -31,22 +29,25 @@ public class ItemListResource {
 
 	private static Logger LOGGER = Logger.getLogger(com.jellysoft.todo.app.resources.ItemListResource.class);
 
+	@GET
 	@Path("/id/{listId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@GET
 	public ItemList getItemList(@PathParam("listId") String listId) throws UnknownHostException {
 		return findItemListById(listId);
 	}
 
-	@Produces(MediaType.APPLICATION_JSON)
 	@GET
-	public List<ItemList> getItemLists() throws UnknownHostException {
+	@Produces(MediaType.APPLICATION_JSON)
+	public ItemList[] getItemLists() throws UnknownHostException {
+
 		DBCursor curosr = Database.getInstance().getItemListCollection().find();
 		List<ItemList> output = new ArrayList<ItemList>();
 		while (curosr.hasNext()) {
-			output.add((ItemList) curosr.next());
+			ItemList itemList = (ItemList) curosr.next();
+			output.add(itemList);
 		}
-		return output;
+		return output.toArray(new ItemList[output.size()]);
+
 	}
 
 	@Path("/id/{listId}")
@@ -60,10 +61,10 @@ public class ItemListResource {
 		collection.update(findQuery, updateCommand);
 	}
 
-	@PUT
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ItemList createItemList(@QueryParam("name") String name) throws UnknownHostException {
-		ItemList list = new ItemList(name);
+	public ItemList createItemList(ItemList list) throws UnknownHostException {
 		DBCollection collection = Database.getInstance().getItemListCollection();
 		BasicDBObject basicDBObject = new BasicDBObject(list.toMap());
 		collection.insert(basicDBObject);

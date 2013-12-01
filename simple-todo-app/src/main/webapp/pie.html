@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>I like pies</title>
+
+
+	<script src="http://yui.yahooapis.com/3.14.0/build/yui/yui-min.js"></script>
+	<script>
+		
+		YUI().use('model', 'model-list', 'model-sync-rest', 'node', 'base', function(Y){
+
+			var pieModel = Y.Base.create('pieModel', Y.Model, [], {
+				
+			}, {
+				ATTRS: {
+					name : {value : null},
+					slices : {value : null},
+					ingredients : {value : null}
+				}
+			});
+			
+			
+			var pieList = Y.Base.create('pielist', Y.ModelList, [Y.ModelSync.REST], {
+				model : pieModel,
+				root: '/simple-todo-app/webresources/pies/',
+				url : '/simple-todo-app/webresources/pies/'
+			});
+			
+			var pies = new pieList();
+			
+			pies.load();
+			
+			pies.after('load', function(e){
+				debugger;	
+			})
+		
+		});
+	
+		
+	
+	</script>
+
+
+</head>
+<body>
+
+</body>
+</html>

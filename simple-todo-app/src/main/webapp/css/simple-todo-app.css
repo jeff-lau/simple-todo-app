@@ -1,10 +1,12 @@
 .lists-container{
 	padding: 80px 15px;
-	text-align: center;
+	margin: auto;
+	width: 75%;
+	border: 1px solid gray;
 	box-sizing: border-box;
 }
 
-.divItemCard, .add-new-list {
+.divItemCard, #add-new-list {
 	border: 3px dotted #D1D1D1;
 	background-color: #E6E5E3;
 	border-radius: 5px;
@@ -13,6 +15,40 @@
 	display: table-cell;
   	text-align: center;
 	vertical-align: middle;
+}
+
+#add-new-list:hover{
+	opacity: 0.8;
+}
+
+
+
+
+div.cardDiv {
+	margin : 5px;
+	border: 1px solid black;
+}
+
+#newCardDiv{
+	display: table-cell;
+	text-align: left;
+	padding: 15px;
+}
+
+#newCardDiv div.label{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: black;
+	text-align: left;
+}
+
+
+.modal-bod {
+	padding: 15px;
+}
+
+#newCardDiv div.value{
 }
 
 
