@@ -9,6 +9,7 @@ YUI.add('template-loader', function(Y) {
 		 * Private variables
 		 */
 		var _compiledTemplates = {};
+		var _templateHtmls = {};
 		var _templateUri = 'templates/';
 
 
@@ -21,6 +22,7 @@ YUI.add('template-loader', function(Y) {
 				sync: true,
 				on: {
 					success: function(transactionid, response, args) {
+						_templateHtmls[name] = response.responseText;
 						_compiledTemplates[name] = Y.Handlebars.compile(response.responseText);
 						if (onsuccess) {
 							onsuccess();
@@ -39,7 +41,7 @@ YUI.add('template-loader', function(Y) {
 		return {
 
 			/**
-			 * Loads handlebar template and related JavaScript.
+			 * Returns the HTML for the template.  This is useful for handlebar partial templates.
 			 *
 			 * @param templateName The name of the template. If the template is PatientTemplate.html then PatientTemplate should be passed.
 			 * @param data JavaScript object that contains variables to be substituted into the handlebar template.
@@ -51,6 +53,13 @@ YUI.add('template-loader', function(Y) {
 					_compileTemplate(cfg.templateName);
 				}
 				return _compiledTemplates[cfg.templateName];
+			},
+			
+			loadTemplateHtml : function(cfg){
+				if (!_templateHtmls[cfg.templateName]) {
+					_compileTemplate(cfg.templateName);
+				}
+				return _templateHtmls[cfg.templateName];
 			}
 		};
 	}());

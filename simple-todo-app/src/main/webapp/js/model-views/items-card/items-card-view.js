@@ -6,6 +6,12 @@ YUI.add('items-card-view', function(Y){
 	    
 	    model: Y.simpleTodo.ItemsCard,
 	    
+	    
+	    events : {
+	    	
+	    	
+	    },
+	    
 	    render: function () {
 
 	    	// Retrieves all of the model instance's data as a simple JSON struct.

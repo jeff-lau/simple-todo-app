@@ -25,6 +25,13 @@
 
 
 div.cardDiv {
+	border: 3px dotted #D1D1D1;
+	background-color: #E6E5E3;
+	height: 240px;
+	width: 240px;
+	display: table-cell;
+  	text-align: center;
+	vertical-align: middle;
 	margin : 5px;
 	border: 1px solid black;
 }
