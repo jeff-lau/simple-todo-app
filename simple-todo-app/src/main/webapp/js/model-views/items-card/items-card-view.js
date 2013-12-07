@@ -1,4 +1,4 @@
-YUI.add('items-card-view', function(Y){
+YUI.add('card-edit-view', function(Y){
 	var CardView = Y.Base.create('cardView', Y.View, [], {
 		
 	    // Compiles the User Template into a reusable Handlebars template.

@@ -3,6 +3,7 @@ package com.jellysoft.todo.app.models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -15,6 +16,7 @@ public class ItemList extends ReflectionDBObject {
 	private String summary;
 	private Date dateCreated;
 	private List<Item> items = new ArrayList<Item>();
+	private Date lastUpdatedDate;
 	private Object someRandom;
 
 	public ItemList() {
@@ -67,6 +69,20 @@ public class ItemList extends ReflectionDBObject {
 
 	public String getId() {
 		return this.get_id().toString();
+	}
+
+	public Date getLastUpdatedDate() {
+		return lastUpdatedDate;
+	}
+
+	public void setLastUpdatedDate(Date lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
+	}
+
+	public Map toMapWithoutId() {
+		Map output = super.toMap();
+		output.remove("_id");
+		return output;
 	}
 
 }

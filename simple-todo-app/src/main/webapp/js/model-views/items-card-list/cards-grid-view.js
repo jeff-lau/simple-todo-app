@@ -10,15 +10,29 @@ YUI.add('cards-grid-view', function(Y){
 	    events: {
 	        'div.cardDiv' : { click: 'selectCard' }
 	    },
+	    
+	    
+	    attachDrag : function(){
+			var cards = Y.all('.cardDiv');
+			cards.each(function(){
+				this.plug(Y.Plugin.Drag);
+				this.dd.addHandle('.cardDiv');
+			});
+	    },
+	    
+	    
 		
 		render : function(){
 			var data = {cards : this.get('modelList').toJSON()};
 			var html = this.template(data);
 			this.get('container').setHTML(html);
+			this.attachDrag();
 		},
 		
 		selectCard : function(e){
-			alert(e.target.get('id'));
+			var modelId = e.target.get('id');
+			var view = new Y.simpleTodo.CardEditView({model: this.get('modelList').getById(modelId)});
+			view.render();
 		}
 	}, {
 		ATTRS : {
@@ -34,5 +48,5 @@ YUI.add('cards-grid-view', function(Y){
 	
 	
 }, '0.0.1', {
-	requires: ['node', 'model', 'view', 'template-loader']
+	requires: ['node', 'model', 'view', 'template-loader', 'card-edit-view', 'dd-plugin']
 });
