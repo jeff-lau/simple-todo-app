@@ -74,6 +74,11 @@
 
 
 	<div id="card-edit-container"></div>
+	
+
+	<div class="deleteBar" id="deleteBar">
+		<span class="glyphicon glyphicon-trash deleteIcon"></span>
+	</div>
 
 	<textarea id="editor1" name="editor1" rows="10" cols="80">
               This is my textarea to be replaced with CKEditor.

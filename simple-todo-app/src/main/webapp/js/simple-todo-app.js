@@ -1,6 +1,7 @@
-YUI().use('node', 'event', 'items-card-model', 'items-card-view', 'items-card-modellist', 'cards-grid-view', 'card-edit-view', 'dd-plugin', function(Y){
+YUI().use('node', 'event', 'items-card-model', 'items-card-view', 'items-card-modellist', 'cards-grid-view', 'card-edit-view', 'dd-plugin', 'dd-drop-plugin', 'dd-delegate', function(Y){
 	
 	Y.on('domready', function(e){
+		
 		var itemsCardList = new Y.simpleTodo.ItemsCardList();
 		itemsCardList.load();
 

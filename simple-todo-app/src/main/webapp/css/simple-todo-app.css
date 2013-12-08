@@ -21,9 +21,6 @@
 	opacity: 0.8;
 }
 
-
-
-
 div.cardDiv {
 	border: 3px dotted #D1D1D1;
 	background-color: #E6E5E3;
@@ -48,6 +45,20 @@ div.cardDiv {
 	font-weight: bold;
 	color: black;
 	text-align: left;
+}
+
+.deleteBar {
+	height: 70px;
+	padding: 20px;
+	text-align: center;
+	position: fixed;
+	bottom: -70;
+	width: 100%;
+	background: black;
+}
+
+.deleteIcon {
+	font-size: 30px;
 }
 
 

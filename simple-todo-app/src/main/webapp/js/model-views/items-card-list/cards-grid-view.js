@@ -8,20 +8,35 @@ YUI.add('cards-grid-view', function(Y){
 		template: Y.Template.loadTemplate({templateName: 'cards-grid'}), 
 		
 	    events: {
-	        'div.cardDiv' : { click: 'selectCard' }
+	        'div.cardDiv' : { 
+	        	click: 'selectCard'
+	        }
+	        
 	    },
 	    
+	    initializer : function(){
+	        var drop = Y.one('#deleteBar').plug(Y.Plugin.Drop);
+		    drop.drop.on('drop:hit', function(e) {
+		    	console.log('target hit');
+		        drop.set('innerHTML', 'You dropped: <strong>' + e.drag.get('node').get('id') + '</strong>');
+		    });
+	    },
 	    
 	    attachDrag : function(){
-			var cards = Y.all('.cardDiv');
-			cards.each(function(){
-				this.plug(Y.Plugin.Drag);
-				this.dd.addHandle('.cardDiv');
-			});
+	    	var del = new Y.DD.Delegate({
+	            container: this.get('container'), //The common container
+	            nodes: '.cardDiv' //The items to make draggable
+	        });
+		
+	    	del.on('drag:start', function(e){
+	    		var drop = Y.one('#deleteBar').setStyle('bottom', 0);
+	    	});
+	    	
+	    	del.on('drag:end', function(e){
+	    		Y.one('#deleteBar').setStyle('bottom', -70);
+	    	});
 	    },
 	    
-	    
-		
 		render : function(){
 			var data = {cards : this.get('modelList').toJSON()};
 			var html = this.template(data);
@@ -48,5 +63,5 @@ YUI.add('cards-grid-view', function(Y){
 	
 	
 }, '0.0.1', {
-	requires: ['node', 'model', 'view', 'template-loader', 'card-edit-view', 'dd-plugin']
+	requires: ['node', 'model', 'view', 'template-loader', 'card-edit-view', 'dd-drop-plugin', 'dd-delegate']
 });
