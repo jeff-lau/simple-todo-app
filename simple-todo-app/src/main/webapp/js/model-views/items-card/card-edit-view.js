@@ -38,9 +38,7 @@ YUI.add('card-edit-view', function(Y){
 	}, {
 		ATTRS : {
 			container : {
-			     valueFn: function () {
-			        return Y.one('#cardEditModal');
-			      }
+			     value : '#cardEditModal'
 			}
 		}
 		

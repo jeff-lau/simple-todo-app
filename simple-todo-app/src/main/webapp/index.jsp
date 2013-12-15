@@ -26,7 +26,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-<script src="ckeditor/ckeditor.js"></script>
+<script src="js/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -62,41 +62,15 @@
 		</div>
 	</div>
 
-
-
-	<div class="lists-container">
+	<div id="app-container">
 	</div>
-	<!-- /.container -->
-
-	<div class="modal fade" id="cardEditModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true"></div>
-	<!-- /.modal -->
-
-
-	<div id="card-edit-container"></div>
-	
-
-	<div class="deleteBar" id="deleteBar">
-		<span class="glyphicon glyphicon-trash deleteIcon"></span>
-	</div>
-
-	<textarea id="editor1" name="editor1" rows="10" cols="80">
-              This is my textarea to be replaced with CKEditor.
-          </textarea>
-	<script>
-          // Replace the <textarea id="editor1"> with a CKEditor
-          // instance, using default configuration.
-          CKEDITOR.replace( 'editor1' );
-      </script>
-
-
 
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<script src="http://yui.yahooapis.com/3.13.0/build/yui/yui-min.js"></script>
 
 	<script src="js/modules/template-loader/template-loader.js"></script>
@@ -105,8 +79,12 @@
 	<script src="js/model-views/items-card-list/custom-rest-sync.js"></script>
 
 	<script src="js/model-views/items-card/card-edit-view.js"></script>
+	<script src="js/model-views/simple-todo-app-view.js"></script>
+	
 	<script src="js/model-views/items-card-list/cards-grid-view.js"></script>
-
+	<script src="js/model-views/items-card/card-view.js"></script>
+	
+	
 	<script src="js/simple-todo-app.js"></script>
 
 </body>

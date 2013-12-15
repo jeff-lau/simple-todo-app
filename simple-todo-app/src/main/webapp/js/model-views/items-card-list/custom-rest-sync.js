@@ -7,8 +7,6 @@ YUI.add('model-sync-customrest', function(Y){
 
 	var temp = function(){}
 	temp.prototype = CustomSync;
-	
-	debugger;
 	Y.namespace('ModelSync').CustomREST = temp;
 	
 }, '0.0.1', {

@@ -1,6 +1,12 @@
+#app-container {
+	margin-top: 70px;		
+}
+
+
 .lists-container{
-	padding: 80px 15px;
+	padding: 10px 15px;
 	margin: auto;
+	bottom: 70px;
 	width: 75%;
 	border: 1px solid gray;
 	box-sizing: border-box;
@@ -48,11 +54,11 @@ div.cardDiv {
 }
 
 .deleteBar {
-	height: 70px;
+	height: 60px;
 	padding: 20px;
 	text-align: center;
 	position: fixed;
-	bottom: -70;
+	bottom: 0px;
 	width: 100%;
 	background: black;
 }
@@ -64,9 +70,6 @@ div.cardDiv {
 
 .modal-bod {
 	padding: 15px;
-}
-
-#newCardDiv div.value{
 }
 
 

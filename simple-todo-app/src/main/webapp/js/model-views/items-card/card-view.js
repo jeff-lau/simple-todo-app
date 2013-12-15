@@ -1,26 +1,36 @@
-YUI.add('card-edit-view', function(Y){
+YUI.add('card-view', function(Y){
 	var CardView = Y.Base.create('cardView', Y.View, [], {
+		
+		containerTemplate: '<div></div>',
 		
 	    // Compiles the User Template into a reusable Handlebars template.
 	    template: Y.Template.loadTemplate({templateName: 'items-card'}),
 	    
 	    model: Y.simpleTodo.ItemsCard,
 	    
-	    
-	    events : {
-	    	
-	    	
+	    events: {
+	        'div.cardDiv' : { 
+	        	click: 'selectCard'
+	        }
+	        
 	    },
 	    
+		selectCard : function(e){
+			var modelId = e.target.get('id');
+			var view = new Y.simpleTodo.CardEditView({model: this.get('modelList').getById(modelId)});
+			view.render();
+		},
+	    
 	    render: function () {
-
-	    	// Retrieves all of the model instance's data as a simple JSON struct.
-	        var itemsCard = this.get('model').toJSON();
+	    	var itemsCard = this.get('model').toJSON();
 	        var content = this.template(itemsCard);
-	        
-	        this.get('container').appendChild(content);
+	        var	container = this.get('container');
+	        container.setHTML(content);
 	        return this;
 	    }
+	}, {
+		ATTRS : {
+		}
 	});
 	
 	Y.namespace('simpleTodo').CardView = CardView;
