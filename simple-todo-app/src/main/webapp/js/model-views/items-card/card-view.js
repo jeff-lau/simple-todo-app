@@ -35,6 +35,6 @@ YUI.add('card-view', function(Y){
 	
 	Y.namespace('simpleTodo').CardView = CardView;
 }, '0.0.1', {
-	requires: ['node', 'event', 'model', 'view', 'template-loader', 'items-card-model']
+	requires: ['model', 'view', 'template-loader', 'items-card-model']
 });
 

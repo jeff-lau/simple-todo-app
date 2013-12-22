@@ -3,7 +3,7 @@ YUI.add('cards-grid-view', function(Y){
 	
 	Y.Handlebars.registerPartial('card', Y.Template.loadTemplate({templateName: 'items-card'}));
 	
-	var CardView = Y.Base.create('cardView', Y.View, [], {
+	var GridView = Y.Base.create('gridView', Y.View, [Y.View.NodeMap], {
 	
 		template: Y.Template.loadTemplate({templateName: 'cards-grid'}), 
 		
@@ -26,9 +26,9 @@ YUI.add('cards-grid-view', function(Y){
 		}
 	});
 	
-	return Y.namespace('simpleTodo').CardsGridView = CardView;
+	return Y.namespace('simpleTodo').CardsGridView = GridView;
 	
 	
 }, '0.0.1', {
-	requires: ['node', 'model', 'view', 'template-loader', 'card-view']
+	requires: ['node', 'model', 'view', 'template-loader', 'card-view', 'view-node-map']
 });

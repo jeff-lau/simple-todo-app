@@ -1,5 +1,13 @@
 #app-container {
-	margin-top: 70px;		
+	margin-top: 50px;
+	
+	background:
+	radial-gradient(black 15%, transparent 16%) 0 0,
+	radial-gradient(black 15%, transparent 16%) 8px 8px,
+	radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+	radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+	background-color:#282828;
+	background-size:16px 16px;
 }
 
 
@@ -8,7 +16,6 @@
 	margin: auto;
 	bottom: 70px;
 	width: 75%;
-	border: 1px solid gray;
 	box-sizing: border-box;
 }
 
@@ -29,14 +36,15 @@
 
 div.cardDiv {
 	border: 3px dotted #D1D1D1;
-	background-color: #E6E5E3;
 	height: 240px;
 	width: 240px;
 	display: table-cell;
   	text-align: center;
 	vertical-align: middle;
-	margin : 5px;
+	margin : 15px;
 	border: 1px solid black;
+	background-color:yellow;
+	box-shadow: 10px 10px 5px #888888;
 }
 
 #newCardDiv{

@@ -49,7 +49,9 @@ YUI.add('simple-todo-app-view', function(Y){
 	    		});
 	    	});
 
-	    	Y.DD.DDM.on('drop:hit', function(){
+
+	    	Y.DD.DDM.on('drop:hit', function(target){
+	    		debugger;
 	    		console.log('drop hit!');
 	    	});
 	    	
@@ -81,6 +83,6 @@ YUI.add('simple-todo-app-view', function(Y){
 	
 	Y.namespace('simpleTodo').SimpleTodoAppView = SimpleTodoAppView;
 }, '0.0.1', {
-	requires: ['view', 'template-loader', 'cards-grid-view', 'card-edit-view', 'dd-plugin', 'dd-drop-plugin', 'dd-delegate', 'dd-drop', 'dd-proxy', 'transition']
+	requires: ['view', 'template-loader', 'card-edit-view', 'cards-grid-view', 'dd-plugin', 'dd-drop-plugin', 'dd-delegate', 'dd-drop', 'dd-proxy', 'transition']
 });
 
