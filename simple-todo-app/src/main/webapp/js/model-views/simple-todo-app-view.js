@@ -32,10 +32,21 @@ YUI.add('simple-todo-app-view', function(Y){
 	    	
 	    	del.on('drag:start', function(e){
 	    		e.target.get('node').setStyle('z-index', 99);
+	    		Y.one('#deleteBar').transition({
+	    			bottom : '0px',
+	    			duration : 0.5
+	    		}, function(){
+	    			// This is required for the drop target to work, because we are moving the drop target.
+	    			drop.sizeShim();
+		    	});
 	    	});
 	    	
 	    	del.on('drag:end', function(e){
 	    		e.target.get('node').setStyle('z-index', 0);
+	    		Y.one('#deleteBar').transition({
+	    			bottom : '-70px',
+	    			duration : 0.5
+	    		});
 	    	});
 
 	    	Y.DD.DDM.on('drop:hit', function(){
@@ -70,6 +81,6 @@ YUI.add('simple-todo-app-view', function(Y){
 	
 	Y.namespace('simpleTodo').SimpleTodoAppView = SimpleTodoAppView;
 }, '0.0.1', {
-	requires: ['view', 'template-loader', 'cards-grid-view', 'card-edit-view', 'dd-plugin', 'dd-drop-plugin', 'dd-delegate', 'dd-drop', 'dd-proxy']
+	requires: ['view', 'template-loader', 'cards-grid-view', 'card-edit-view', 'dd-plugin', 'dd-drop-plugin', 'dd-delegate', 'dd-drop', 'dd-proxy', 'transition']
 });
 

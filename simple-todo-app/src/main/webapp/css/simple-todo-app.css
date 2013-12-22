@@ -58,7 +58,7 @@ div.cardDiv {
 	padding: 20px;
 	text-align: center;
 	position: fixed;
-	bottom: 0px;
+	bottom: -70px;
 	width: 100%;
 	background: black;
 }
