@@ -7,13 +7,10 @@ YUI.add('simple-todo-app-view', function(Y){
 	    events: {
 	    },
 
-	    intiailizer : function(){
-	        var drop = Y.one('#deleteBar').plug(Y.Plugin.Drop);
-		    drop.drop.on('drop:hit', function(e) {
-		    	console.log('target hit');
-		        drop.set('innerHTML', 'You dropped: <strong>' + e.drag.get('node').get('id') + '</strong>');
+	    initializer : function(){
+		    this.publish('delete-card', {
+		    	emitFacade : false
 		    });
-
 	    },
 
 	    _attachDrag : function(){
@@ -50,11 +47,9 @@ YUI.add('simple-todo-app-view', function(Y){
 	    	});
 
 
-	    	Y.DD.DDM.on('drop:hit', function(target){
-	    		debugger;
-	    		console.log('drop hit!');
-	    	});
-	    	
+	    	Y.DD.DDM.on('drop:hit', function(e){
+	    		this.fire('delete-card', e.drag.get('node').get('id'));
+	    	}, this);
 	    },
 
 	    
@@ -63,12 +58,18 @@ YUI.add('simple-todo-app-view', function(Y){
 	    	var content = this.template({});
 	    	var	container = this.get('container');
 	    	container.setHTML(content);
-	    	
-			var itemsCardList = new Y.simpleTodo.ItemsCardList();
+
+	    	var cardsContainer = container.one('#lists-container');
+
+	    	var itemsCardList = new Y.simpleTodo.ItemsCardList();
+	    	var that = this;
 			itemsCardList.load();
 			itemsCardList.after('load', function(e){
 				var view = new Y.simpleTodo.CardsGridView({modelList: this});
-				container.one('#cardsContainer').appendChild(view.render().get('container'));
+				cardsContainer.appendChild(view.render().get('container'));
+				that.on('simpleTodoAppView:delete-card', function(cardId){
+					view.removeCard(cardId);
+				});
 			});
 			
 			this._attachDrag();

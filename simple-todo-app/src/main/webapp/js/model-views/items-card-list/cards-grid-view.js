@@ -5,13 +5,25 @@ YUI.add('cards-grid-view', function(Y){
 	
 	var GridView = Y.Base.create('gridView', Y.View, [Y.View.NodeMap], {
 	
-		template: Y.Template.loadTemplate({templateName: 'cards-grid'}), 
+		template: Y.Template.loadTemplate({templateName: 'cards-grid'}),
+
+		containerTemplate: '<div></div>',
 		
 	    initializer : function(){
+	    	this.get('modelList').after('remove', this.render, this);
+	    },
+	    
+	    removeCard : function(cardId){
+	    	var modelList = this.get('modelList');
+	    	var toBeRemoved = modelList.getById(cardId);
+	    	toBeRemoved.destroy({remove : true}, function(){
+	    		modelList.remove(toBeRemoved, {silent : false});
+	    	});
 	    },
 	    
 		render : function(){
 			var modelList = this.get('modelList');
+			this.get('container').setHTML('');
 			for (var i = 0; i < modelList.size(); i++){
 				var v = new Y.simpleTodo.CardView({model : modelList.item(i)});
 				this.get('container').appendChild(v.render().get('container'));
@@ -20,9 +32,6 @@ YUI.add('cards-grid-view', function(Y){
 		}
 	}, {
 		ATTRS : {
-		    container: {
-		    	value : Y.one('#cardsContainer')
-		    }
 		}
 	});
 	
