@@ -15,13 +15,12 @@ YUI.add('card-edit-view', function(Y){
 	    
 	    updateCard : function(e){
 	    	e.preventDefault();
-	    	
 	    	var title = Y.one('#cardTitle').get('value'); 
 	    	var summary = Y.one('#cardSummary').get('value');
 	    	this.get('model').set('name',title);
 	    	this.get('model').set('summary',summary);
-	    	
 	    	this.get('model').save();
+	    	 $('#cardEditModal').modal('hide');
 	    },
 	    
 	    

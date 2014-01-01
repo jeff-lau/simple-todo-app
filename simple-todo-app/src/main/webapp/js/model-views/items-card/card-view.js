@@ -15,12 +15,15 @@ YUI.add('card-view', function(Y){
 	        
 	    },
 	    
+	    initializer : function(){
+	    	this.get('model').on('change', this.render, this);
+	    },
+	    
 		selectCard : function(e){
-			var modelId = e.target.get('id');
-			var view = new Y.simpleTodo.CardEditView({model: this.get('modelList').getById(modelId)});
+			var view = new Y.simpleTodo.CardEditView({model: this.get('model')});
 			view.render();
 		},
-	    
+		
 	    render: function () {
 	    	var itemsCard = this.get('model').toJSON();
 	        var content = this.template(itemsCard);

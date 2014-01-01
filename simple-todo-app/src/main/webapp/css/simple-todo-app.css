@@ -47,6 +47,20 @@ div.cardDiv {
 	box-shadow: 10px 10px 5px #888888;
 }
 
+
+div.cardDiv .cardTitleDiv {
+	font-weight: bold;
+}
+
+div.cardDiv .lastUpdatedDateDiv {
+	position: absolute;
+	right: 5px;
+	bottom: 0px;
+	padding: 3px;
+	font-style: italic;
+	color: gray;
+}
+
 #newCardDiv{
 	display: table-cell;
 	text-align: left;

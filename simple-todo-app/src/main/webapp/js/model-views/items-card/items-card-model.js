@@ -3,7 +3,10 @@ YUI.add('items-card-model', function(Y){
 	var ItemsCard = Y.Base.create('item-list', Y.Model, [Y.ModelSync.REST], {
 		
 		root: '/simple-todo-app/webresources/itemlists/',
-		url: '/simple-todo-app/webresources/itemlists/id/{id}'
+		url: '/simple-todo-app/webresources/itemlists/id/{id}',
+		
+		initializer : function(){
+		}
 			
 	}, {
 		
@@ -15,6 +18,7 @@ YUI.add('items-card-model', function(Y){
 			//items : {value : null},
 			dateCreated : {value : null},
 			someRandom : {value : null},
+			lastUpdatedDate : {value : null},
 			partialObject : {value : null}
 		}
 	});
