@@ -70,6 +70,10 @@ YUI.add('simple-todo-app-view', function(Y){
 				that.on('simpleTodoAppView:delete-card', function(cardId){
 					view.removeCard(cardId);
 				});
+				
+				that.on('cardEditView:create-card', function(model){
+					view.addCard(model);
+				});
 			});
 			
 			this._attachDrag();

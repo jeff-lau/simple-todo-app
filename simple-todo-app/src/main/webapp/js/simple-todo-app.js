@@ -11,7 +11,9 @@ YUI().use('node', 'event', 'items-card-model', 'items-card-modellist', 'simple-t
 				name: '<Card Title>',
 				summary: '<Card Summary>'
 			});
+			
 			var newCardView = new Y.simpleTodo.CardEditView({model: newCard});
+			newCardView.addTarget(appView);
 			newCardView.render();
 		});
 	});

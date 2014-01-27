@@ -11,6 +11,12 @@ YUI.add('cards-grid-view', function(Y){
 		
 	    initializer : function(){
 	    	this.get('modelList').after('remove', this.render, this);
+	    	this.get('modelList').after('add', this.render, this);
+
+	    },
+	    
+	    addCard : function(card){
+	    	this.get('modelList').add(card);
 	    },
 	    
 	    removeCard : function(cardId){

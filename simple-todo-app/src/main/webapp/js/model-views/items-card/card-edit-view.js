@@ -6,6 +6,12 @@ YUI.add('card-edit-view', function(Y){
 	    
 	    model: Y.simpleTodo.ItemsCard,
 	    
+	    initializer : function(){ 
+		    this.publish('create-card', {
+		    	emitFacade : true
+		    });
+	    },
+	    
 	    events : {
 	    	'#updateCardButton' : {
 	    		'click' : 'updateCard'
@@ -17,9 +23,21 @@ YUI.add('card-edit-view', function(Y){
 	    	e.preventDefault();
 	    	var title = Y.one('#cardTitle').get('value'); 
 	    	var summary = Y.one('#cardSummary').get('value');
-	    	this.get('model').set('name',title);
-	    	this.get('model').set('summary',summary);
-	    	this.get('model').save();
+	    	var model = this.get('model');
+	    	
+	    	model.set('name',title);
+	    	model.set('summary',summary);
+	    	
+	    	var isNew = model.isNew();
+	    	var that = this;
+
+	    	// Firing after save if ensure the generated ID is synced back to the model.
+	    	model.save(null, function(err, response){
+	    		if (isNew){
+	    			that.fire('create-card', model);
+	    		}
+	    	});
+	    	
 	    	 $('#cardEditModal').modal('hide');
 	    },
 	    
